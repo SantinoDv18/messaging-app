@@ -2,6 +2,14 @@
 
 A real-time messaging application built with modern technologies, focused on scalability, performance, and learning distributed systems.
 
+## Requirements
+Make sure you have the following installed:
+
+- Python 3.10+
+- Node.js (recommended: LTS version)
+- npm (comes with Node.js)
+- Redis (for caching and real-time features)
+
 ## Tech Stack
 
 ### Backend
@@ -36,7 +44,7 @@ A real-time messaging application built with modern technologies, focused on sca
 
   `cd messaging-app`
 
-**2. Setup Backend (FastAPI)**
+**2. Backend setup (FastAPI)**
 
   Create virtual environment
   
@@ -57,6 +65,11 @@ A real-time messaging application built with modern technologies, focused on sca
 
   `pip install -r requirements.txt`
 
+### Frontend setup (React)
+
+  `cd frontend`
+  `npm install`
+  
 ## Running the project
 
 **Backend**
