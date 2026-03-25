@@ -68,6 +68,7 @@ Make sure you have the following installed:
 ### Frontend setup (React)
 
   `cd frontend`
+  
   `npm install`
   
 ## Running the project
