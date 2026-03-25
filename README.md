@@ -55,22 +55,7 @@ A real-time messaging application built with modern technologies, focused on sca
 
 **4. Install dependencies**
 
-  `pip install fastapi[standard]`
-
-  `pip install redis`
-
-**5. Save dependencies**
-
-  `pip freeze > requirements.txt`
-
-**6. Setup Frontend (React)**
-
-  `npx create-react-app frontend`
-  
-  `cd frontend`
-  
-  `npm install`
-  
+  `pip install -r requirements.txt`
 
 ## Running the project
 
