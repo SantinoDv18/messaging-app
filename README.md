@@ -65,7 +65,7 @@ Make sure you have the following installed:
 
   `pip install -r requirements.txt`
 
-**3. Frontend setup (React)
+**3. Frontend setup (React)**
 
   `cd frontend`
   
