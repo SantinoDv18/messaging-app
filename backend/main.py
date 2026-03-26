@@ -1,8 +1,16 @@
 from fastapi import FastAPI;
+from fastapi.middleware.cors import CORSMiddleware;
 
 app = FastAPI();
 
-@app.get("/")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+);
+@app.get("/health")
 def read_root():
-    return 'indexPage';
+    return {"status": "ok"};
 
