@@ -10,6 +10,7 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True,
 );
+
 @app.get("/health")
 def read_root():
     return {"status": "ok"};
