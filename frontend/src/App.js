@@ -1,14 +1,11 @@
-import HealthCheck from "./components/HealthCheck";
+import AuthForm from "./components/AuthForm";
 
-function index() {
-    
-    return (
-        <div>
-        <h1>Index page</h1>
-        <HealthCheck />
-        </div>
-    );
-    
+function App() {  
+  return (
+    <div className="App">
+      <AuthForm />
+    </div>
+  );
 }
 
-export default index;
+export default App;

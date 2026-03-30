@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "testuser",
+      "email": "test@test.com",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "username": "steven",
+      "email": "stiven@email.com",
+      "password": "0420"
+    },
+    {
+      "id": 3,
+      "username": "juanito",
+      "email": "juanito@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 4,
+      "username": "samer1",
+      "email": "samer@gmail.com",
+      "password": "4321",
+      "created_at": "2026-03-30T18:04:41.984923"
+    },
+    {
+      "id": 5,
+      "username": "sebas",
+      "email": "sebas@gmail.com",
+      "password": "12345",
+      "created_at": "2026-03-30T18:18:03.401356"
+    }
+  ]
+}
