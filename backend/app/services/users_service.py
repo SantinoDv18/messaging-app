@@ -1,6 +1,6 @@
 from datetime import datetime
 from fastapi import HTTPException
-from backend.utils.file_handler import read_users, write_users
+from ..utils.file_handler import read_users, write_users
 
 # Función para registrar un usuario
 def register_user(user):
