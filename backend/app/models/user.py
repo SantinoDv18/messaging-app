@@ -1,20 +1,36 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from sqlalchemy import Column, Integer, String
+from ..database import Base
 
-# Modelo para registrar un usuario (lo que envía el cliente)
+# -------------------------
+# 🔹 Pydantic (API)
+# -------------------------
 class UserCreate(BaseModel):
-    username: str
-    email: str
-    password: str
+    user_username: str
+    user_email: str
+    user_password_hash: str  # este lo transformas a hash
 
-# Modelo para login
 class LoginCreate(BaseModel):
-    email: str
-    password: str
+    user_email: str
+    user_password_hash: str
 
-# Modelo completo del usuario (lo que guarda el sistema)
 class User(BaseModel):
-    id: int
-    username: str
-    email: str
-    password: str
-    created_at: str
+    user_id: str
+    user_username: str
+    user_email: str
+
+    class Config:
+        from_attributes = True
+
+# -------------------------
+# 🔹 SQLAlchemy (BD)
+# -------------------------
+
+class UserDB(Base):
+    __tablename__ = "tbl_users"
+
+    user_id = Column(Integer, primary_key=True, index=True)
+    user_username = Column(String, unique=True)
+    user_email = Column(String, unique=True)
+    user_password_hash = Column(String(255))
+    
