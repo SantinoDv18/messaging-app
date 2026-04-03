@@ -27,7 +27,6 @@ class LoginCreate(BaseModel):
     user_password_hash: str
 
 class User(BaseModel):
-<<<<<<< HEAD
     user_id: int = Field(alias="user_id")  # 👈 mapea user_id → 
     email: str
 
@@ -35,14 +34,6 @@ class User(BaseModel):
         from_attributes = True
         populate_by_name = True
 
-=======
-    user_id: str
-    user_username: str
-    user_email: str
-
-    class Config:
-        from_attributes = True
->>>>>>> 7f728629fd2fa9eca89535f52a6ba59b0ec58591
 
 # -------------------------
 # 🔹 SQLAlchemy (BD)
@@ -54,9 +45,4 @@ class UserDB(Base):
     user_id = Column(Integer, primary_key=True, index=True)
     user_username = Column(String, unique=True)
     user_email = Column(String, unique=True)
-<<<<<<< HEAD
     user_password_hash = Column(String)
-=======
-    user_password_hash = Column(String(255))
-    
->>>>>>> 7f728629fd2fa9eca89535f52a6ba59b0ec58591
