@@ -38,11 +38,27 @@ def login(credentials: LoginCreate):
 def health():
     return {"status": "ok"}
 
+<<<<<<< HEAD
 
 @router.get("/perfil")
 def perfil(user: str = Depends(get_current_user)):
     
         
+=======
+@router.get("/test-db")
+def test_db():
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(text("SELECT * FROM tbl_states"))
+            return {"status": "ok", "result" : dict(result.fetchall())}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+    
+    #test endpoint
+
+@router.get("/perfil")
+def perfil(user: str = Depends(get_current_user)):
+>>>>>>> 7f728629fd2fa9eca89535f52a6ba59b0ec58591
     return {
         "mensaje": "Acceso permitido",
         "usuario": user
