@@ -1,52 +1,60 @@
 from datetime import datetime
+from ..models.user import UserDB
+from ..database import SessionLocal
 from fastapi import HTTPException
-from ..utils.file_handler import read_users, write_users
 
 # Función para registrar un usuario
 def register_user(user):
-    users = read_users()
+    db = SessionLocal()
+    
 
-    # Validar si el email ya existe
-    if any(u["email"] == user.email for u in users["users"]):
-        raise HTTPException(status_code=400, detail="Email ya registrado")
+ # Validar si el email ya existe
+    existing_email = db.query(UserDB).filter(UserDB.user_email == user.user_email).first()
+    if existing_email:
+     raise HTTPException(status_code=400, detail="Email ya registrado")
 
-    # Validar si el username ya existe
-    if any(u["username"] == user.username for u in users["users"]):
-        raise HTTPException(status_code=400, detail="Username ya existe")
+    existing_username = db.query(UserDB).filter(UserDB.user_username == user.user_username).first()
+    if existing_username:
+     raise HTTPException(status_code=400, detail="Username ya existe")
+    
+    try:
+        new_user = UserDB(
+            user_username=user.user_username,
+            user_email=user.user_email,
+            user_password_hash=user.user_password_hash
+        )
 
-    # Crear nuevo usuario
-    new_user = {
-        "id": len(users["users"]) + 1,  # ID incremental simple
-        "username": user.username,
-        "email": user.email,
-        "password": user.password,  # ⚠️ No seguro (falta hash)
-        "created_at": datetime.now().isoformat()
-    }
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
 
-    # Agregar a la lista
-    users["users"].append(new_user)
+        return new_user
 
-    # Guardar en archivo
-    write_users(users)
-
-    return new_user
+    finally:
+        db.close()
 
 
 # Función para login
 def login_user(credentials):
-    users = read_users()
+    db = SessionLocal()
 
-    # Buscar usuario que coincida con email y password
-    for u in users["users"]:
-        if u["email"] == credentials.email and u["password"] == credentials.password:
-            return {
-                "message": "Login exitoso",
-                "user": {
-                    "id": u["id"],
-                    "username": u["username"],
-                    "email": u["email"]
-                }
+    try:
+        user = db.query(UserDB).filter(
+            UserDB.user_email == credentials.user_email,
+            UserDB.user_password_hash == credentials.user_password_hash
+        ).first()
+
+        if not user:
+            raise HTTPException(status_code=401, detail="Credenciales inválidas")
+
+        return {
+            "message": "Login exitoso",
+            "user": {
+                "id": user.user_id,
+                "username": user.user_username,
+                "email": user.user_email
             }
+        }
 
-    # Si no encuentra coincidencia
-    raise HTTPException(status_code=401, detail="Credenciales inválidas")
+    finally:
+        db.close()

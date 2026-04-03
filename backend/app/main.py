@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routes import auth
+from .database import Base, engine
+from .models.user import UserDB
 
 
 # Crear instancia de FastAPI
@@ -15,7 +17,8 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-
+Base.metadata.create_all(bind=engine)
+print(Base.metadata.tables.keys())
 
 # Registrar rutas de autenticación
 app.include_router(auth.router)
